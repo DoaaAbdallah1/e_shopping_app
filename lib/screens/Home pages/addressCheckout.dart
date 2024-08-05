@@ -1,43 +1,28 @@
-// ignore_for_file: prefer_const_constructors, file_names, prefer_const_literals_to_create_immutables, sort_child_properties_last
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, file_names
 
 import 'package:e_shopping_app/constants/colors.dart';
 import 'package:e_shopping_app/screens/Home%20pages/addAddress.dart';
 import 'package:flutter/material.dart';
 
-class AddressPage extends StatefulWidget {
-  const AddressPage({super.key});
+class AddressCheckout extends StatefulWidget {
+  const AddressCheckout({super.key});
 
   @override
-  State<AddressPage> createState() => _AddressPageState();
+  State<AddressCheckout> createState() => _AddressCheckoutState();
 }
 
-class _AddressPageState extends State<AddressPage> {
+class _AddressCheckoutState extends State<AddressCheckout> {
   List<bool> isChecked = [false, false, false, false, false, false, false];
+
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-          appBar: AppBar(
-            title: Text('Address'),
-            leading: IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: Icon(Icons.arrow_back)),
-          ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder:  (context) => AddAddress(),));
-            },
-            child: Icon(
-              Icons.add,
-              color: Colors.white,
-            ),
-            backgroundColor: TColors.primary,
-          ),
-          body: Container(
-            width: double.infinity,
-            margin: EdgeInsets.all(15),
+    return Container(
+      width: double.infinity,
+      margin: EdgeInsets.all(4),
+      child: Column(
+        children: [
+          Expanded(
+
             child: ListView.builder(
               itemCount: 7,
               itemBuilder: (context, index) {
@@ -79,9 +64,8 @@ class _AddressPageState extends State<AddressPage> {
                                 ),
                                 Icon(
                                   Icons.check_circle,
-                                  color: isChecked[index]
-                                      ? Colors.black
-                                      : Colors.white,
+                                  color:
+                                      isChecked[index] ? Colors.black : Colors.white,
                                 )
                               ],
                             ),
@@ -99,10 +83,36 @@ class _AddressPageState extends State<AddressPage> {
                 );
               },
             ),
-          )
-          
           ),
+        SizedBox(height: 5,),
+          ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            //objectCartData.notifyListeners();
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => AddAddress(),
+                                ));
+                          });
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: TColors.primary,
+                          minimumSize: const Size(double.infinity, 55),
+                        ),
+                        child: const Text(
+                          "Add Address",
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    
+    
+        ],
+      ),
     );
   }
 }
-

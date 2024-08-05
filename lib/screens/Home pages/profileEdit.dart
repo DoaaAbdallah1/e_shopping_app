@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors, file_names, prefer_const_literals_to_create_immutables, prefer_adjacent_string_concatenation, prefer_interpolation_to_compose_strings, depend_on_referenced_packages, avoid_print
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:e_shopping_app/screens/Home%20pages/Profile.dart';
 import 'package:e_shopping_app/screens/Home%20pages/homeScreen.dart';
 import 'package:e_shopping_app/theme/widget_themes/text_theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';

@@ -4,7 +4,9 @@ import 'package:e_shopping_app/constants/colors.dart';
 import 'package:e_shopping_app/constants/image_strings.dart';
 import 'package:e_shopping_app/model/product.dart';
 import 'package:e_shopping_app/provider/dataChanged.dart';
+import 'package:e_shopping_app/screens/Home%20pages/addressCheckout.dart';
 import 'package:e_shopping_app/screens/Home%20pages/endScreen_Success.dart';
+import 'package:e_shopping_app/screens/Home%20pages/paymentList.dart';
 import 'package:e_shopping_app/theme/widget_themes/text_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +20,25 @@ class CheckOut extends StatefulWidget {
 }
 
 class _CheckOutState extends State<CheckOut> {
+  List<bool> isChecked = [false, false, false, false, false, false, false];
+
+
+  showModel(int change) {
+    return showModalBottomSheet(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
+      ),
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+            padding: EdgeInsets.only(right: 7, left: 7, top: 10),
+            height: 320,
+            color: Colors.white,
+            child:change==0?PaymentList(): AddressCheckout());
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final CartItem1 objectCartData =
@@ -341,7 +362,9 @@ class _CheckOutState extends State<CheckOut> {
                               style: TTextTheme.lightTextTheme.titleLarge,
                             ),
                             TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                  showModel(0);
+                              },
                               child: Text("Change",
                                   style: TextStyle(fontSize: 14)),
                             )
@@ -377,7 +400,9 @@ class _CheckOutState extends State<CheckOut> {
                               style: TTextTheme.lightTextTheme.titleLarge,
                             ),
                             TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                showModel(1);
+                              },
                               child: Text("Change",
                                   style: TextStyle(fontSize: 14)),
                             )
