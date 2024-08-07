@@ -21,6 +21,44 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   List<bool> light = [false, true, false];
+
+  Future<void> _reauthenticateAndDelete() async {
+    try {
+      final providerData =
+          FirebaseAuth.instance.currentUser?.providerData.first;
+
+      if (AppleAuthProvider().providerId == providerData!.providerId) {
+        await FirebaseAuth.instance.currentUser!
+            .reauthenticateWithProvider(AppleAuthProvider());
+      } else if (GoogleAuthProvider().providerId == providerData.providerId) {
+        await FirebaseAuth.instance.currentUser!
+            .reauthenticateWithProvider(GoogleAuthProvider());
+      }
+
+      await FirebaseAuth.instance.currentUser?.delete();
+    } catch (e) {
+      // Handle exceptions
+    }
+  }
+
+  Future<void> deleteUserAccount() async {
+    try {
+      await FirebaseAuth.instance.currentUser!.delete();
+    } on FirebaseAuthException catch (e) {
+      //  log.e(e);
+
+      if (e.code == "requires-recent-login") {
+        await _reauthenticateAndDelete();
+      } else {
+        // Handle other Firebase exceptions
+      }
+    } catch (e) {
+      //  log.e(e);
+
+      // Handle general exception
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser;
@@ -576,6 +614,32 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               style: TTextTheme.lightTextTheme.titleLarge,
                             )),
                           ),
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        GestureDetector(
+                          onTap: () async {
+                            await deleteUserAccount();
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => SignInScreen(),
+                                ));
+                          },
+                          child: Container(
+                            margin: EdgeInsets.only(left: 30, right: 30),
+                            height: 50,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all()),
+                            child: Center(
+                                child: Text(
+                              "Delete Account",
+                              style: TTextTheme.lightTextTheme.titleLarge,
+                            )),
+                          ),
                         )
                       ])),
             ),
@@ -631,8 +695,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 color: Colors.white)),
                                         child: CircleAvatar(
                                           radius: 30.0,
-                                          backgroundImage: NetworkImage(
-                                                  data["imgURL"]),
+                                          backgroundImage:
+                                              NetworkImage(data["imgURL"]),
                                           backgroundColor: Colors.transparent,
                                         )),
                                     SizedBox(
