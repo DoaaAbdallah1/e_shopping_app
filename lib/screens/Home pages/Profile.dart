@@ -61,6 +61,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final double widthScreen = MediaQuery.of(context).size.width;
+
     final user = FirebaseAuth.instance.currentUser;
     CollectionReference users =
         FirebaseFirestore.instance.collection('usersss');
@@ -198,7 +200,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               .lightTextTheme.headlineSmall,
                                         ),
                                         SizedBox(
-                                          width: 250,
+                                          width: widthScreen/2,
                                           child: Text(
                                             "Add,remove products and move to checkout",
                                             style: TTextTheme
@@ -273,7 +275,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             .lightTextTheme.headlineSmall,
                                       ),
                                       SizedBox(
-                                        width: 260,
+                                        width: widthScreen/2,
                                         child: Text(
                                           "withdraw balance to registered bank account",
                                           style: TTextTheme
@@ -431,20 +433,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 height: 15,
                               ),
                               Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Icon(
-                                    Icons.location_on,
-                                    size: 28,
-                                    color: TColors.primary,
-                                  ),
-                                  SizedBox(
-                                    width: 20,
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                  Row(
                                     children: [
-                                      Row(
+                                      Icon(
+                                        Icons.location_on,
+                                        size: 28,
+                                        color: TColors.primary,
+                                      ),
+                                      SizedBox(
+                                        width: 20,
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             "Geolocation",
@@ -452,9 +455,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 .lightTextTheme.headlineSmall,
                                           ),
                                           SizedBox(
-                                            width: 130,
-                                          ),
-                                          Switch(
+                                            width: widthScreen/2,
+                                            child: Text(
+                                              "Set recommendation based on location",
+                                              style: TTextTheme
+                                                  .lightTextTheme.bodyMedium,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                    Switch(
                                             // This bool value toggles the switch.
                                             value: light[0],
                                             activeColor: TColors.primary,
@@ -465,38 +477,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               });
                                             },
                                           )
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        width: 250,
-                                        child: Text(
-                                          "Set recommendation based on location",
-                                          style: TTextTheme
-                                              .lightTextTheme.bodyMedium,
-                                        ),
-                                      )
-                                    ],
-                                  ),
                                 ],
                               ),
                               SizedBox(
                                 height: 15,
                               ),
                               Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Icon(
-                                    Icons.safety_check_outlined,
-                                    size: 28,
-                                    color: TColors.primary,
-                                  ),
-                                  SizedBox(
-                                    width: 20,
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                  Row(
                                     children: [
-                                      Row(
+                                      Icon(
+                                        Icons.safety_check_outlined,
+                                        size: 28,
+                                        color: TColors.primary,
+                                      ),
+                                      SizedBox(
+                                        width: 20,
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             "Safe Mode",
@@ -504,9 +505,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 .lightTextTheme.headlineSmall,
                                           ),
                                           SizedBox(
-                                            width: 140,
-                                          ),
-                                          Switch(
+                                            width: widthScreen/2,
+                                            child: Text(
+                                              "Search result is safe for all ages",
+                                              style: TTextTheme
+                                                  .lightTextTheme.bodyMedium,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                    Switch(
                                             // This bool value toggles the switch.
                                             value: light[2],
                                             activeColor: TColors.primary,
@@ -517,38 +527,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               });
                                             },
                                           )
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        width: 250,
-                                        child: Text(
-                                          "Search result is safe for all ages",
-                                          style: TTextTheme
-                                              .lightTextTheme.bodyMedium,
-                                        ),
-                                      )
-                                    ],
-                                  ),
                                 ],
                               ),
                               SizedBox(
                                 height: 15,
                               ),
                               Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Icon(
-                                    Icons.image,
-                                    size: 28,
-                                    color: TColors.primary,
-                                  ),
-                                  SizedBox(
-                                    width: 20,
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                  Row(
                                     children: [
-                                      Row(
+                                      Icon(
+                                        Icons.image,
+                                        size: 28,
+                                        color: TColors.primary,
+                                      ),
+                                      SizedBox(
+                                        width: 20,
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             "HD Image Quality",
@@ -556,9 +555,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 .lightTextTheme.headlineSmall,
                                           ),
                                           SizedBox(
-                                            width: 80,
-                                          ),
-                                          Switch(
+                                            width: widthScreen/2,
+                                            child: Text(
+                                              "Set image quality to be seen",
+                                              style: TTextTheme
+                                                  .lightTextTheme.bodyMedium,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  Switch(
                                             // This bool value toggles the switch.
                                             value: light[1],
                                             activeColor: TColors.primary,
@@ -569,18 +577,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               });
                                             },
                                           )
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        width: 250,
-                                        child: Text(
-                                          "Set image quality to be seen",
-                                          style: TTextTheme
-                                              .lightTextTheme.bodyMedium,
-                                        ),
-                                      )
-                                    ],
-                                  ),
                                 ],
                               ),
                               SizedBox(
@@ -663,7 +659,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         Map<String, dynamic> data =
                             snapshot.data!.data() as Map<String, dynamic>;
                         return Container(
-                          // width: double.infinity,
+                          //width: double.infinity,
                           //height: 300,
                           margin: EdgeInsets.only(top: 30, left: 30, right: 15),
                           child: Column(
@@ -684,48 +680,54 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   height: 38,
                                 ),
                                 Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Container(
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(50),
-                                            border: Border.all(
-                                                color: Colors.white)),
-                                        child: CircleAvatar(
-                                          radius: 30.0,
-                                          backgroundImage:
-                                              NetworkImage(data["imgURL"]),
-                                          backgroundColor: Colors.transparent,
-                                        )),
-                                    SizedBox(
-                                      width: 12,
-                                    ),
-                                    Center(
-                                      child: SizedBox(
-                                        width: 240,
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              "${data["first_name"].toString().capitalize}" +
-                                                  " " +
-                                                  "${data["last_name"].toString().capitalize}",
-                                              style: TTextTheme
-                                                  .darkTextTheme.headlineSmall,
-                                            ),
-                                            Text(
-                                              user.email.toString(),
-                                              style: TTextTheme
-                                                  .darkTextTheme.bodyMedium,
-                                            )
-                                          ],
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Container(
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(50),
+                                                border: Border.all(
+                                                    color: Colors.white)),
+                                            child: CircleAvatar(
+                                              radius: 30.0,
+                                              backgroundImage:
+                                                  NetworkImage(data["imgURL"]),
+                                              backgroundColor: Colors.transparent,
+                                            )),
+                                        SizedBox(
+                                          width: 12,
                                         ),
-                                      ),
+                                        Center(
+                                          child: SizedBox(
+                                            width: 240,
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  "${data["first_name"].toString().capitalize}" +
+                                                      " " +
+                                                      "${data["last_name"].toString().capitalize}",
+                                                  style: TTextTheme
+                                                      .darkTextTheme.headlineSmall,
+                                                ),
+                                                Text(
+                                                  user.email.toString(),
+                                                  style: TTextTheme
+                                                      .darkTextTheme.bodyMedium,
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                    GestureDetector(
+                                    
+                                      GestureDetector(
                                       onTap: () {
                                         print("doaa");
                                         Navigator.pushReplacement(
@@ -741,6 +743,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         color: Colors.white,
                                       ),
                                     )
+                                  
                                   ],
                                 )
                               ]),

@@ -46,6 +46,8 @@ class _StoreScreenState extends State<StoreScreen> {
   ];
   @override
   Widget build(BuildContext context) {
+    final double widthScreen = MediaQuery.of(context).size.width;
+
         final objectCartData = Provider.of<CartItem1>(context);
 
     return DefaultTabController(
