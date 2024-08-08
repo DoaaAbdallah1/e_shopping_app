@@ -18,6 +18,8 @@ class WishlistScreen extends StatefulWidget {
 class _WishlistScreenState extends State<WishlistScreen> {
   @override
   Widget build(BuildContext context) {
+    final double widthScreen = MediaQuery.of(context).size.width;
+
     final CartItem1 objectCartData =
         Provider.of<CartItem1>(context, listen: true);
 
@@ -70,7 +72,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
                       children: [
                         SizedBox(
                           height: 280,
-                          width: 200,
+                          width:widthScreen/2.28 ,
                           child: Stack(
                             children: [
                               Container(

@@ -325,7 +325,23 @@ class _ProfileEditState extends State<ProfileEdit> {
                                 height: 10,
                               ),
                               GestureDetector(
-                                  onTap: () {
+                                  onTap: () async {
+                                    await uploadImage2Screen(
+                                            ImageSource.gallery);
+                                        print(imgName);
+                                        print("-------------------");
+                                        final storageRef = FirebaseStorage
+                                            .instance
+                                            .ref(imgName);
+                                        await storageRef.putFile(imgPath!);
+                                        print(imgName);
+                                        print("-------------------");
+
+                                        String url =
+                                            await storageRef.getDownloadURL();
+                                        users.doc(credential!.uid).update({
+                                          "imgURL": url,
+                                        });
                                     //showModel();
                                   },
                                   child: Text("Change Profile Picture"))
@@ -476,22 +492,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                                   //   SizedBox(width: 10,),
                                   IconButton(
                                       onPressed: () async {
-                                        await uploadImage2Screen(
-                                            ImageSource.gallery);
-                                        print(imgName);
-                                        print("-------------------");
-                                        final storageRef = FirebaseStorage
-                                            .instance
-                                            .ref(imgName);
-                                        await storageRef.putFile(imgPath!);
-                                        print(imgName);
-                                        print("-------------------");
-
-                                        String url =
-                                            await storageRef.getDownloadURL();
-                                        users.doc(credential!.uid).update({
-                                          "imgURL": url,
-                                        });
+                                        
                                         //  await uploadImage2Screen();
                                       },
                                       icon: Icon(

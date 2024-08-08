@@ -176,10 +176,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     height: 35,
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      SizedBox(
-                        width: 182,
+                      Expanded(
+                        //width: 182,
                         child: TextFormField(
                           controller: firstNameController,
                           validator: (value) {
@@ -202,8 +202,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           textInputAction: TextInputAction.done,
                         ),
                       ),
-                      SizedBox(
-                        width: 182,
+                      SizedBox(width: 10,),
+                      Expanded(
+                        //width: 182,
                         child: TextFormField(
                           controller: lastNameController,
                           validator: (value) {
