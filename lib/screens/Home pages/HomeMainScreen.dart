@@ -63,6 +63,8 @@ class _HomeMainScreenState extends State<HomeMainScreen> {
 
     final Stream<QuerySnapshot> _categoryStream =
         FirebaseFirestore.instance.collection('categories').snapshots();
+    final Stream<QuerySnapshot> _productStream =
+        FirebaseFirestore.instance.collection('products').snapshots();
 
     final user = FirebaseAuth.instance.currentUser;
     return SafeArea(
@@ -198,73 +200,75 @@ class _HomeMainScreenState extends State<HomeMainScreen> {
                           }
 
                           return ListView.separated(
-                        separatorBuilder: (context, index) {
-                          return SizedBox(
-                            width: 5,
-                          );
-                        },
-                        itemCount: snapshot.data!.docs.length,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-                          final DocumentSnapshot documentSnapshot =snapshot.data!.docs[index];
-                          return GestureDetector(
-                            onTap: () {},
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                  width: index == 0 ? 10 : 0,
-                                ),
-                                Column(
+                            separatorBuilder: (context, index) {
+                              return SizedBox(
+                                width: 5,
+                              );
+                            },
+                            itemCount: snapshot.data!.docs.length,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) {
+                              final DocumentSnapshot documentSnapshot =
+                                  snapshot.data!.docs[index];
+                              return GestureDetector(
+                                onTap: () {},
+                                child: Row(
                                   children: [
-                                    GestureDetector(
-                                      onTap: () {
-                                        // Navigator.push(
-                                        //     context,
-                                        //     MaterialPageRoute(
-                                        //       builder: (context) => CartScreen(),
-                                        //     ));
-                                      },
-                                      child: Container(
-                                          padding: EdgeInsets.all(8),
-                                          decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              borderRadius:
-                                                  BorderRadius.circular(50)),
-                                          child: Center(
-                                            child: Image(
-                                                height: 30,
-                                                width: 30,
-                                                image: NetworkImage(
-                                                    documentSnapshot["img"])),
-                                          )),
-                                    ),
                                     SizedBox(
-                                      height: 8,
+                                      width: index == 0 ? 10 : 0,
                                     ),
-                                    SizedBox(
-                                      width: 75,
-                                      child: Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 15.0),
-                                        child: Text(
-                                          documentSnapshot["name"],
-                                          // textWidthBasis: TextWidthBasis.parent
-                                          // ,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w400),
+                                    Column(
+                                      children: [
+                                        GestureDetector(
+                                          onTap: () {
+                                            // Navigator.push(
+                                            //     context,
+                                            //     MaterialPageRoute(
+                                            //       builder: (context) => CartScreen(),
+                                            //     ));
+                                          },
+                                          child: Container(
+                                              padding: EdgeInsets.all(8),
+                                              decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          50)),
+                                              child: Center(
+                                                child: Image(
+                                                    height: 30,
+                                                    width: 30,
+                                                    image: NetworkImage(
+                                                        documentSnapshot[
+                                                            "img"])),
+                                              )),
                                         ),
-                                      ),
-                                    )
+                                        SizedBox(
+                                          height: 8,
+                                        ),
+                                        SizedBox(
+                                          width: 75,
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 15.0),
+                                            child: Text(
+                                              documentSnapshot["name"],
+                                              // textWidthBasis: TextWidthBasis.parent
+                                              // ,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.w400),
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
                                   ],
                                 ),
-                              ],
-                            ),
+                              );
+                            },
                           );
-                        },
-                      )
-                  ;
                         },
                       ),
                     )
@@ -415,7 +419,20 @@ class _HomeMainScreenState extends State<HomeMainScreen> {
                     height: 20,
                   ),
                   SingleChildScrollView(
-                    child: GridView.builder(
+                    child: StreamBuilder<QuerySnapshot>(
+                      stream: _productStream,
+                      builder: (BuildContext context,
+                          AsyncSnapshot<QuerySnapshot> snapshot) {
+                        if (snapshot.hasError) {
+                          return Text('Something went wrong');
+                        }
+
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return Text("Loading");
+                        }
+
+                        return  GridView.builder(
                       itemCount: products.length,
                       physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
@@ -425,6 +442,7 @@ class _HomeMainScreenState extends State<HomeMainScreen> {
                           mainAxisSpacing: 16,
                           crossAxisSpacing: 16),
                       itemBuilder: (context, index) {
+                        final DocumentSnapshot documentProductSnapshot =snapshot.data!.docs[index];
                         return Column(
                           children: [
                             SizedBox(
@@ -454,7 +472,7 @@ class _HomeMainScreenState extends State<HomeMainScreen> {
                                             MaterialPageRoute(
                                               builder: (context) =>
                                                   ProductScreen(
-                                                products: products[index],
+                                                products:Product(title: documentProductSnapshot["title"], description:documentProductSnapshot['description'], image: documentProductSnapshot['img'], price: 348, category: documentProductSnapshot["brand"], rate: 4, discount: 5, isHeart: true, index: index),
                                                 index: index,
                                               ),
                                             ));
@@ -477,7 +495,7 @@ class _HomeMainScreenState extends State<HomeMainScreen> {
                                                             Radius.circular(
                                                                 20))),
                                                 child: Image.asset(
-                                                  products[index].image,
+                                                  documentProductSnapshot['img'],
                                                   width: 160,
                                                   height: 160,
                                                 ),
@@ -652,6 +670,9 @@ class _HomeMainScreenState extends State<HomeMainScreen> {
                             ),
                           ],
                         );
+                      },
+                    )
+                ;
                       },
                     ),
                   )
