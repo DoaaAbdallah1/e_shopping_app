@@ -2,6 +2,7 @@
 
 import 'package:e_shopping_app/constants/colors.dart';
 import 'package:e_shopping_app/constants/image_strings.dart';
+import 'package:e_shopping_app/model/category.dart';
 import 'package:e_shopping_app/provider/dataChanged.dart';
 import 'package:e_shopping_app/screens/Home%20pages/PartCategory/category.dart';
 import 'package:e_shopping_app/screens/Home%20pages/brand.dart';
@@ -44,11 +45,18 @@ class _StoreScreenState extends State<StoreScreen> {
       "isActiveCategory": false
     },
   ];
+  
+  @override
+  void initState() {
+    super.initState();
+
+  }
+
   @override
   Widget build(BuildContext context) {
     final double widthScreen = MediaQuery.of(context).size.width;
 
-        final objectCartData = Provider.of<CartItem1>(context);
+    final objectCartData = Provider.of<CartItem1>(context);
 
     return DefaultTabController(
       length: listImageCategory.length,
@@ -64,11 +72,11 @@ class _StoreScreenState extends State<StoreScreen> {
                     children: [
                       IconButton(
                           onPressed: () {
-                             Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => CartScreen(),
-                            ));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => CartScreen(),
+                                ));
                           },
                           icon: Icon(
                             Icons.shopping_bag_outlined,
@@ -160,15 +168,15 @@ class _StoreScreenState extends State<StoreScreen> {
                               children: [
                                 Text(
                                   "Features Brands",
-                                  style: TTextTheme.lightTextTheme.headlineSmall,
+                                  style:
+                                      TTextTheme.lightTextTheme.headlineSmall,
                                 ),
                                 TextButton(
                                     onPressed: () {
-                                       Navigator.push(
+                                      Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) =>
-                                              Brands(),
+                                          builder: (context) => Brands(),
                                         ),
                                       );
                                     },
@@ -217,7 +225,8 @@ class _StoreScreenState extends State<StoreScreen> {
                                               children: [
                                                 Text(
                                                   "Adidas",
-                                                  style: TTextTheme.lightTextTheme
+                                                  style: TTextTheme
+                                                      .lightTextTheme
                                                       .headlineSmall,
                                                 ),
                                                 SizedBox(
@@ -236,7 +245,8 @@ class _StoreScreenState extends State<StoreScreen> {
                                                 "95 Products",
                                                 style: TextStyle(
                                                     fontSize: 14,
-                                                    fontWeight: FontWeight.w300),
+                                                    fontWeight:
+                                                        FontWeight.w300),
                                                 overflow: TextOverflow.ellipsis,
                                               ),
                                             )
@@ -263,7 +273,8 @@ class _StoreScreenState extends State<StoreScreen> {
                             listImageCategory[value]["isActiveCategory"] = true;
                             for (var i = 0; i < listImageCategory.length; i++) {
                               if (i != value) {
-                                listImageCategory[i]["isActiveCategory"] = false;
+                                listImageCategory[i]["isActiveCategory"] =
+                                    false;
                               }
                             }
                           });
@@ -284,14 +295,14 @@ class _StoreScreenState extends State<StoreScreen> {
                 },
                 body: TabBarView(
                   children: [
-                  CategoryProducts(),
-                  CategoryProducts(),
-                  CategoryProducts(),
-                  CategoryProducts(),
-                  CategoryProducts(),
-                  CategoryProducts(),
-                  CategoryProducts(),
-                  CategoryProducts(),
+                    CategoryProducts(),
+                    CategoryProducts(),
+                    CategoryProducts(),
+                    CategoryProducts(),
+                    CategoryProducts(),
+                    CategoryProducts(),
+                    CategoryProducts(),
+                    CategoryProducts(),
                   ],
                 ))),
       ),

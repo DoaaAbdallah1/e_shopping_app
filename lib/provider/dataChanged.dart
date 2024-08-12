@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_is_empty, file_names
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_shopping_app/model/wishlist.dart';
 import 'package:flutter/material.dart';
 import 'package:e_shopping_app/model/product.dart';
@@ -86,4 +87,5 @@ class CartItem1 with ChangeNotifier {
     }
 //    notifyListeners();
   }
+
 }
