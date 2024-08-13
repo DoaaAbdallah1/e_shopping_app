@@ -16,16 +16,12 @@ class EmailVerificationScreen extends StatefulWidget {
   const EmailVerificationScreen({super.key});
 
   @override
-  State<EmailVerificationScreen> createState() => _EmailVerificationScreenState();
+  State<EmailVerificationScreen> createState() =>
+      _EmailVerificationScreenState();
 }
 
 class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
-
-
-
-
-
-   bool isEmailVerified = false;
+  bool isEmailVerified = false;
   bool canResendEmail = false;
   Timer? timer;
 
@@ -53,13 +49,6 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
     }
   }
 
-
-
-
-
-
-
-
   sendVerificationEmail() async {
     try {
       await FirebaseAuth.instance.currentUser!.sendEmailVerification();
@@ -81,112 +70,168 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
     super.dispose();
   }
 
-
-
-
-
-
   @override
   Widget build(BuildContext context) {
     return isEmailVerified
-        ? HomeScreen( )
-        : SafeArea(child: Scaffold(
-      appBar: AppBar(
-        actions: [IconButton(icon: Icon(Icons.close),onPressed: () {
-          
-          Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => SignInScreen(),));
-        },)],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.only(right: 15,left: 15,top: 15),
-        child: Column(children: [
-            SizedBox(height: 30,),
-             Image.asset("assets/images/animations/sammy-line-man-receives-a-mail.png"),
-              SizedBox(height: 20,),
-            Text(TTexts.confirmEmail,style: TTextTheme.lightTextTheme.headlineMedium,textAlign: TextAlign.center,),
-            SizedBox(height: 20,),
-            Text(FirebaseAuth.instance.currentUser!.email.toString(),style: TTextTheme.lightTextTheme.bodyLarge,),
-            SizedBox(height: 20,),
-            SizedBox(height: 100,width: double.infinity,child: Text(TTexts.confirmEmailSubTitle,textAlign: TextAlign.center,style: TTextTheme.lightTextTheme.bodyMedium,)),
-            SizedBox(height: 20,),
-              
-          
-          SizedBox(height: 30,),
-            Container(
-                    height: 68,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                        
-                        borderRadius: BorderRadius.all(Radius.circular(20))),
-                    child: GestureDetector(
-                      onTap: () {
-                        canResendEmail? sendVerificationEmail() : null;
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Color.fromARGB(8, 0, 0, 0),
-                          borderRadius: BorderRadius.circular(20)
+        ? HomeScreen()
+        : SafeArea(
+            child: Scaffold(
+            appBar: AppBar(
+              actions: [
+                IconButton(
+                  icon: Icon(Icons.close),
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => SignInScreen(),
+                        ));
+                  },
+                )
+              ],
+            ),
+            body: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.only(right: 10, left: 10, top: 10),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Image.asset(
+                        "assets/images/animations/sammy-line-man-receives-a-mail.png"),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                      TTexts.confirmEmail,
+                      style: TTextTheme.lightTextTheme.headlineMedium,
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                      FirebaseAuth.instance.currentUser!.email.toString(),
+                      style: TTextTheme.lightTextTheme.bodyLarge,
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    SizedBox(
+                        height: 100,
+                        width: double.infinity,
+                        child: Text(
+                          TTexts.confirmEmailSubTitle,
+                          textAlign: TextAlign.center,
+                          style: TTextTheme.lightTextTheme.bodyMedium,
+                        )),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Container(
+                      height: 68,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(20))),
+                      child: GestureDetector(
+                        onTap: () {
+                          canResendEmail ? sendVerificationEmail() : null;
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: Color.fromARGB(8, 0, 0, 0),
+                              borderRadius: BorderRadius.circular(20)),
+                          child: Center(
+                              child: Text(
+                            TTexts.resendEmail,
+                            style: TextStyle(
+                                color: TColors.primary,
+                                fontWeight: FontWeight.w500),
+                          )),
                         ),
-                        child: Center(
-                            child: Text(  TTexts.resendEmail,
-                                                  style: TextStyle(color: TColors.primary,fontWeight: FontWeight.w500),)),
                       ),
                     ),
-                  ),
-        ],),
-      ),
-    ));
+                  ],
+                ),
+              ),
+            ),
+          ));
   }
 }
-
-
 
 class CreateAccountSuccessfully extends StatefulWidget {
   const CreateAccountSuccessfully({super.key});
 
   @override
-  State<CreateAccountSuccessfully> createState() => _CreateAccountSuccessfullyState();
+  State<CreateAccountSuccessfully> createState() =>
+      _CreateAccountSuccessfullyState();
 }
 
 class _CreateAccountSuccessfullyState extends State<CreateAccountSuccessfully> {
   @override
   Widget build(BuildContext context) {
-    return  SafeArea(child: Scaffold(
-    
+    return SafeArea(
+        child: Scaffold(
       body: Padding(
-        padding: const EdgeInsets.only(right: 15,left: 15,top: 15),
-        child: Column(children: [
-            SizedBox(height: 60,),
-             Image.asset(TImages.staticSuccessIllustration),
-              SizedBox(height: 20,),
-            Text(TTexts.yourAccountCreatedTitle,style: TTextTheme.lightTextTheme.headlineMedium,textAlign: TextAlign.center,),
-            SizedBox(height: 20,),
-            SizedBox(height: 90,width: double.infinity,child: Text(TTexts.yourAccountCreatedSubTitle,textAlign: TextAlign.center,style: TTextTheme.lightTextTheme.bodyMedium,)),
-            SizedBox(height: 20,),
-              GestureDetector(
-                onTap:(){
-                  Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => HomeScreen(),
-                        ));
-                },
-                child: Container(
-                      height: 68,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                          color: TColors.primary,
-                          borderRadius: BorderRadius.all(Radius.circular(20))),
-                      child: Center(
-                          child: Text(
-                        TTexts.tContinue,
-                        style: TTextTheme.darkTextTheme.bodyLarge,
-                      )),
-                    ),
+        padding: const EdgeInsets.only(right: 15, left: 15, top: 15),
+        child: Column(
+          children: [
+            SizedBox(
+              height: 60,
+            ),
+            Image.asset(TImages.staticSuccessIllustration),
+            SizedBox(
+              height: 20,
+            ),
+            Text(
+              TTexts.yourAccountCreatedTitle,
+              style: TTextTheme.lightTextTheme.headlineMedium,
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            SizedBox(
+                height: 90,
+                width: double.infinity,
+                child: Text(
+                  TTexts.yourAccountCreatedSubTitle,
+                  textAlign: TextAlign.center,
+                  style: TTextTheme.lightTextTheme.bodyMedium,
+                )),
+            SizedBox(
+              height: 20,
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => HomeScreen(),
+                    ));
+              },
+              child: Container(
+                height: 68,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                    color: TColors.primary,
+                    borderRadius: BorderRadius.all(Radius.circular(20))),
+                child: Center(
+                    child: Text(
+                  TTexts.tContinue,
+                  style: TTextTheme.darkTextTheme.bodyLarge,
+                )),
               ),
-          
-          SizedBox(height: 30,),
-        ],),
+            ),
+            SizedBox(
+              height: 30,
+            ),
+          ],
+        ),
       ),
     ));
   }

@@ -1,13 +1,18 @@
+// ignore_for_file: prefer_const_constructors, use_super_parameters, use_key_in_widget_constructors
+
 import 'package:e_shopping_app/constants/image_strings.dart';
+import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 class Product {
   final String title;
   final String description;
   final String image;
-  final double price;
+  final int price;
   final String category;
   final double rate;
-  final double discount;
+  final int discount;
   final bool isHeart;
   final int index;
   Product({
@@ -25,6 +30,7 @@ class Product {
 
 
 final List<Product> products = [
+  
   Product(
       index: 0,
       isHeart: false,

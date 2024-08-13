@@ -5,6 +5,7 @@ import 'package:e_shopping_app/firebase_options.dart';
 import 'package:e_shopping_app/model/product.dart';
 import 'package:e_shopping_app/provider/googleSignin.dart';
 import 'package:e_shopping_app/screens/EmailVerificationScreen.dart';
+import 'package:e_shopping_app/screens/Home%20pages/HomeMainScreen.dart';
 import 'package:e_shopping_app/screens/onBoardingScreen.dart';
 import 'package:e_shopping_app/shared/snakbar.dart';
 import 'package:e_shopping_app/theme/theme.dart';
@@ -41,6 +42,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+
         ChangeNotifierProvider(create: (context) {
           return CartItem1(
               index: 0,

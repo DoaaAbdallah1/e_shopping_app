@@ -13,11 +13,13 @@ class ProductScreen extends StatefulWidget {
   const ProductScreen({super.key, required this.products, required this.index});
   final Product products;
   final int index;
+  
   @override
   State<ProductScreen> createState() => _ProductScreenState();
 }
 
 class _ProductScreenState extends State<ProductScreen> {
+  
   int currentNumber = 1;
   int currentImage = 0;
   @override
