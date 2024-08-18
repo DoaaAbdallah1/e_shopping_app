@@ -199,7 +199,7 @@ class _CartScreenState extends State<CartScreen> {
                           borderRadius: BorderRadius.circular(20),
                         ),
                         padding: const EdgeInsets.all(10),
-                        child: Image.asset(
+                        child: Image.network(
                           objectCartData.cartItems[index].product.image,
                         ),
                       ),

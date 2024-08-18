@@ -201,7 +201,7 @@ class _ProductScreenState extends State<ProductScreen> {
                       });
                     },
                     itemBuilder: (context, index) {
-                      return Image.asset(widget.products.image);
+                      return Image.network(widget.products.image);
                     },
                   ),
                 ),

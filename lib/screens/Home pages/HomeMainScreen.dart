@@ -469,8 +469,27 @@ class _HomeMainScreenState extends State<HomeMainScreen> {
                                                         MaterialPageRoute(
                                                           builder: (context) =>
                                                               ProductScreen(
-                                                            products:
-                                                                Product(title: ourData['title'], description: ourData['description'], image: ourData['img'], price: ourData['price'], category: ourData['brand'], rate: ourData['rate'], discount: ourData['dis'], isHeart: true, index: ourData['index']),
+                                                            products: Product(
+                                                                title: ourData[
+                                                                    'title'],
+                                                                description:
+                                                                    ourData[
+                                                                        'description'],
+                                                                image: ourData[
+                                                                    'img'],
+                                                                price: ourData[
+                                                                    'price'],
+                                                                category:
+                                                                    ourData[
+                                                                        'brand'],
+                                                                rate: ourData[
+                                                                    'rate'],
+                                                                discount:
+                                                                    ourData[
+                                                                        'dis'],
+                                                                isHeart: true,
+                                                                index: ourData[
+                                                                    'index']),
                                                             index: index,
                                                           ),
                                                         ));
